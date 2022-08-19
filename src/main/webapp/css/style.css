@@ -1,0 +1,10 @@
+#create-account-form {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 1em;
+}
+
+#address-input {
+    height: 4em
+}
