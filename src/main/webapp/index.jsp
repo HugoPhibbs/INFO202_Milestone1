@@ -6,6 +6,11 @@
 		<title>JSP Page</title>
 	</head>
 	<body>
-		<h1>Hello World!</h1>
+            <header>
+                <h1>Welcome to the Ski Master Store!</h1>
+            </header>
+            
+            <a href="index.jsp">Home</a>
+            <a href="sign-in.jsp">Sign In</a>
 	</body>
 </html>
