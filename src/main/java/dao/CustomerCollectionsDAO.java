@@ -5,9 +5,8 @@
 package dao;
 
 import domain.Customer;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Objects;
+import java.util.HashMap;
 
 /**
  * Collections DAO for customers
@@ -16,35 +15,47 @@ import java.util.Objects;
  */
 public class CustomerCollectionsDAO implements CustomerDAO {
     
-    private static ArrayList<Customer> customers = new ArrayList<Customer>();
+    private static final HashMap<String, Customer> customers = new HashMap<>();
 
     @Override
     public Collection<Customer> getCustomers() {
-        return customers;
+        return customers.values();
     }
 
     @Override
     public void saveCustomer(Customer customer) {
-        customers.add(customer);
+        customers.put(customer.getUsername(), customer);
     }
 
     @Override
-    public Customer searchByID(Integer id) {
-        for (Customer customer : customers) {
-            if (Objects.equals(customer.getCustomerId(), id)) {
-                return customer;
-            }
-        }
-        return null;
+    public Customer searchByUsername(String username) {
+        return customers.get(username);
     }
     
     @Override
     public void removeCustomer(Customer customer) {
-        customers.remove(customer);
+        customers.remove(customer.getUsername());
     }
 
     @Override
     public void removeAll() {
         customers.clear();
     }
+    
+    @Override
+    public int size() {
+        return customers.size();
+    }
+
+    @Override
+    public boolean matchesCustomer(String username, String password) {
+        for (Customer customer : customers.values()) {
+            if (customer.getUsername().equals(username) && customer.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
 }
