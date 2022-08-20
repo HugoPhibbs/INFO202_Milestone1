@@ -46,5 +46,11 @@ public class ProductCollectionsDAO implements ProductDAO {
 	public Collection<Product> filterByCategory(String category) {
 		return categories.get(category);
 	}
+        
+        @Override
+        public void removeAll(){
+            products.clear();
+            categories.clear();
+        }
 
 }
