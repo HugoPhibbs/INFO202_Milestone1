@@ -19,5 +19,7 @@ public interface ProductDAO {
 	void saveProduct(Product product);
 
 	Product searchById(String id);
+        
+        void removeAll();
 
 }
