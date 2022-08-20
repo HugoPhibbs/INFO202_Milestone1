@@ -43,10 +43,26 @@ public interface CustomerDAO {
     void saveCustomer(Customer customer);
     
     /**
-     * Searches and returns a Customer by the given ID
+     * Searches and returns a Customer by the given username
      * 
-     * @param id string for id to be searched
+     * @param username string for username be searched
      * @return Customer found by ID
      */
-    Customer searchByID(Integer id);
+    Customer searchByUsername(String username);
+    
+    /**
+     * Returns the number of customers in this DAO
+     * 
+     * @return int for the size of this DAO
+     */
+    int size();
+    
+    /**
+     * Checks if a given username and password matches an existing 
+     * 
+     * @param username String
+     * @param password String
+     * @return boolean if a customer was matched or not
+     */
+    boolean matchesCustomer(String username, String password);
 }
