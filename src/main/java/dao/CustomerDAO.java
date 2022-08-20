@@ -49,13 +49,7 @@ public interface CustomerDAO {
      * @return Customer found by ID
      */
     Customer searchByUsername(String username);
-    
-    /**
-     * Returns the number of customers in this DAO
-     * 
-     * @return int for the size of this DAO
-     */
-    int size();
+   
     
     /**
      * Checks if a given username and password matches an existing 

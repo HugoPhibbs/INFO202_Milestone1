@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.hasSize;
 
 /**
  * CustomerDAO test
@@ -46,13 +47,13 @@ public class CustomerDAOTest {
     @Test
     public void testRemoveCustomer() {
         dao.removeCustomer(customer1);
-        assertThat("Ensure customer was removed", dao.size(), is(1));
+        assertThat("Ensure customer was removed", dao.getCustomers(), hasSize(1));
         assertThat("Ensure customer cannot be found", dao.searchByUsername("username1"), is(nullValue()));
     }
     
     @Test
     public void testRemoveAll() {
-        assertThat("Checking that dao is non empty", dao.size(), is(2));
+        assertThat("Checking that dao is non empty", dao.getCustomers(), hasSize(2));
         dao.removeAll();
         assertThat("Checking dao was cleared", dao.getCustomers(), empty());
     } 
@@ -70,29 +71,29 @@ public class CustomerDAOTest {
     
     @Test
     public void testSize() {
-        assertThat("Size is correct before removing a customer", dao.size(), is(2));
+        assertThat("Size is correct before removing a customer", dao.getCustomers(), hasSize(2));
         dao.removeCustomer(customer1);
-        assertThat("Size has changed", dao.size(), is(1));
+        assertThat("Size has changed", dao.getCustomers(), hasSize(1));
         
         dao.saveCustomer(customer3);
-        assertThat("Size has increased", dao.size(), is(2));
+        assertThat("Size has increased", dao.getCustomers(), hasSize(2));
     }
     
     @Test
     public void testGetCustomers() {
         Collection<Customer> customers = dao.getCustomers();
-        assertThat("Size of customers is correct", customers.size(), is(2));
+        assertThat("Size of customers is correct", customers, hasSize(2));
     }
 
     @Test
     public void testSaveCustomer() {
-        assertThat("Checking original size", dao.size(), is(2));
+        assertThat("Checking original size", dao.getCustomers(), hasSize(2));
         assertThat("Checking customer 1 is contained", dao.searchByUsername("username1"), is(customer1));
         dao.saveCustomer(customer1);
-        assertThat("Save ignores duplicate entries", dao.size(), is(2));
+        assertThat("Save ignores duplicate entries", dao.getCustomers(), hasSize(2));
     
         dao.saveCustomer(customer3);
-        assertThat("Dao size is correct", dao.size(), is(3));
+        assertThat("Dao size is correct", dao.getCustomers(), hasSize(3));
         assertThat("Customer was added", dao.searchByUsername("username3"), is(customer3));
     }
 

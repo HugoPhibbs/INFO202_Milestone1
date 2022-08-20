@@ -41,11 +41,6 @@ public class CustomerCollectionsDAO implements CustomerDAO {
     public void removeAll() {
         customers.clear();
     }
-    
-    @Override
-    public int size() {
-        return customers.size();
-    }
 
     @Override
     public boolean matchesCustomer(String username, String password) {
