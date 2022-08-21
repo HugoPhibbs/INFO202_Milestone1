@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Objects;
+
 /**
  * @author Mark George
  */
@@ -16,8 +18,7 @@ public class Customer {
 	public Customer() {
 	}
 
-	public Customer(Integer customerId, String username, String firstName, String surname, String shippingAddress, String emailAddress) {
-		this.customerId = customerId;
+	public Customer(String username, String firstName, String surname, String shippingAddress, String emailAddress) {
 		this.username = username;
 		this.firstName = firstName;
 		this.surname = surname;
@@ -85,5 +86,28 @@ public class Customer {
 	public String toString() {
 		return "Customer{" + "customerId=" + customerId + ", username=" + username + ", firstName=" + firstName + ", surname=" + surname + ", password=" + password + ", emailAddress=" + emailAddress + ", shippingAddress=" + shippingAddress + '}';
 	}
+
+        @Override
+        public int hashCode() {
+            int hash = 7;
+            hash = 37 * hash + Objects.hashCode(this.username);
+            return hash;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            final Customer other = (Customer) obj;
+            return Objects.equals(this.username, other.username);
+        }
+
 
 }
