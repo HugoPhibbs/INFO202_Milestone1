@@ -15,21 +15,14 @@
         <header>
             <h1>Sign in</h1>
         </header>
-
+        
+        <a href="index.jsp">Return home</a>
 
         <div>
             <h3>Account Details</h3>
-            <form id="create-account-form">
-                <div>
-                    <label for="username-input">Username:</label>
-                    <input id="username-input" type="text">
-                </div>
-
-                <div>
-                    <label for="password-input">Password:</label>
-                    <input id="password-input" type="text">
-                </div>
-
+            <form id="create-account-form" action = "sign-in" method="POST">
+                <label for="username-input">Username:</label><input name = "username-input" id="username-input" type="text">
+                <label for="password-input">Password:</label><input name = "password-input" id="password-input" type="text">
                 <button>Sign In!</button>
             </form>
 
