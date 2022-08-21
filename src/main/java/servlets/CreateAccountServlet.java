@@ -4,20 +4,23 @@
  */
 package servlets;
 
-import dao.ProductCollectionsDAO;
+import dao.CustomerDAO;
+import dao.JdbiDaoFactory;
+import domain.Customer;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet for creating an account
  * 
  * @author Hugo
  */
-@WebServlet(name = "CreateAccountServlet", urlPatterns = {"/create-acccount"})
+@WebServlet(name = "CreateAccountServlet", urlPatterns = {"/create-account"})
 public class CreateAccountServlet extends HttpServlet {
 
     /**
@@ -40,6 +43,14 @@ public class CreateAccountServlet extends HttpServlet {
         String address = request.getParameter("address");
         String password = request.getParameter("password");
         
-        // TODO implement!
+        // CustomerDAO dao = new CustomerCollectionsDAO();
+        CustomerDAO dao = JdbiDaoFactory.getCustomerDAO();
+        Customer customer = new Customer(userName, firstName, lastName, address, email);
+        customer.setPassword(password);
+        
+        dao.saveCustomer(customer);
+       
+        response.sendRedirect("index.jsp");
     }
+    
 }

@@ -4,11 +4,7 @@
  */
 package servlets;
 
-import dao.CustomerDAO;
-import dao.JdbiDaoFactory;
-import domain.Customer;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +16,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Hugo
  */
-@WebServlet(name = "SignInServlet", urlPatterns = {"/sign-in"})
-public class SignInServlet extends HttpServlet {
+@WebServlet(name = "SignOutServlet", urlPatterns = {"/sign-out"})
+public class SignOutServlet extends HttpServlet {
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -34,17 +30,7 @@ public class SignInServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username-input");
-        String password = request.getParameter("password-input");
-        
-        // CustomerDAO dao = new CustomerCollectionsDAO();
-        CustomerDAO dao = JdbiDaoFactory.getCustomerDAO();
-        if (dao.matchCustomer(username, password) != null) {
-            Customer customer = dao.searchByUsername(username);
-            HttpSession session = request.getSession();
-            session.setAttribute("CURRENT-CUSTOMER", customer);
-        } 
+        request.getSession().invalidate();
         response.sendRedirect("index.jsp");
     }
-
 }
