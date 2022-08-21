@@ -15,6 +15,7 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -22,13 +23,18 @@ import org.junit.jupiter.api.BeforeEach;
  *
  * @author Hugo
  */
-public class ProductCollectionsDAOTest {
+public class ProductDAOTest {
 
-    ProductDAO dao = new ProductCollectionsDAO();
+    // ProductDAO dao = new ProductCollectionsDAO();
+    ProductDAO dao = JdbiDaoFactory.getProductDAO();
     Product product1;
     Product product2;
     Product product3;
     
+    @BeforeAll
+    public static void initialize() {
+        JdbiDaoFactory.setJdbcUri("jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/schema.sql'");
+    }
     
     @BeforeEach
     public void setUp() {
