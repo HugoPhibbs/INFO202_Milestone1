@@ -14,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
+import org.junit.jupiter.api.BeforeAll;
 
 /**
  * CustomerDAO test
@@ -24,16 +25,23 @@ import static org.hamcrest.Matchers.hasSize;
  */
 public class CustomerDAOTest {
     
-    CustomerCollectionsDAO dao = new CustomerCollectionsDAO();
+    // CustomerDAO dao = new CustomerCollectionsDAO();
+    CustomerDAO dao = JdbiDaoFactory.getCustomerDAO();
     Customer customer1;
     Customer customer2;
     Customer customer3;
     
+    @BeforeAll
+    public static void initialize() {
+        JdbiDaoFactory.setJdbcUri("jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/schema.sql'");
+    }
+    
     @BeforeEach
     public void setUp() {
-        customer1 = new Customer(1, "username1", "", "", "", "");
-        customer2 = new Customer(2, "username2", "", "", "", "");
-        customer3 = new Customer(3, "username3", "", "", "", "");
+        customer1 = new Customer("username1", "", "", "", "");
+        customer1.setPassword("password1");
+        customer2 = new Customer("username2", "", "", "", "");
+        customer3 = new Customer("username3", "", "", "", "");
         
         dao.saveCustomer(customer1);
         dao.saveCustomer(customer2);
@@ -60,13 +68,11 @@ public class CustomerDAOTest {
     
     @Test
     public void testMatchesCustomer() {
-        customer1.setPassword("password1");
-        assertThat("Matches with contained customer", dao.matchesCustomer("username1", "password1"), is(true));
-        assertThat("Matches with contained customer, incorrect username", dao.matchesCustomer("usernam1", "password1"), is(false));
-        assertThat("Matches with contained customer, incorrect password", dao.matchesCustomer("username1", "passwod1"), is(false));
+        assertThat("Matches with contained customer", dao.matchCustomer("username1", "password1"), is(customer1));
+        assertThat("Matches with contained customer, incorrect username", dao.matchCustomer("usernam1", "password1"), is(nullValue()));
+        assertThat("Matches with contained customer, incorrect password", dao.matchCustomer("username1", "passwod1"), is(nullValue()));
        
-        
-        assertThat("Doesn't match with a non contained customer at all", dao.matchesCustomer("username3", "pass"), is(false));
+        assertThat("Doesn't match with a non contained customer at all", dao.matchCustomer("username3", "pass"), is(nullValue()));
     }
     
     @Test
@@ -98,7 +104,7 @@ public class CustomerDAOTest {
     }
 
     @Test
-    public void testSearchByID() {
+    public void testSearchByUsername() {
         assertThat("Simple search by id", dao.searchByUsername("username1"), is(customer1));
         assertThat("Simple search, customer not contained", dao.searchByUsername("username3"), is(nullValue()));
         assertThat("Simple search, customer doesn't exist", dao.searchByUsername("username4"), is(nullValue()));
