@@ -36,14 +36,14 @@ public class JdbiDaoFactory {
 		if(HIKARI_DATA_SOURCE == null) {
 			initialisePool();
 		}
-		return JDBI.onDemand(CustomerDAO.class);
+		return JDBI.onDemand(CustomerJdbiDAO.class);
 	}
         
         public static ProductDAO getProductDAO() {
 		if(HIKARI_DATA_SOURCE == null) {
 			initialisePool();
 		}
-		return JDBI.onDemand(ProductDAO.class);
+		return JDBI.onDemand(ProductJdbiDAO.class);
 	}
 
 
