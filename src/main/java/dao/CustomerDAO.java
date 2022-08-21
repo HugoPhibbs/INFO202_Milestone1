@@ -52,11 +52,11 @@ public interface CustomerDAO {
    
     
     /**
-     * Checks if a given username and password matches an existing 
+     * Checks if a given username and password matches an existing Customer
      * 
      * @param username String
      * @param password String
-     * @return boolean if a customer was matched or not
+     * @return Customer found, otherwise null
      */
-    boolean matchesCustomer(String username, String password);
+    Customer matchCustomer(String username, String password);
 }

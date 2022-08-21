@@ -20,7 +20,7 @@ import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 public interface CustomerJdbiDAO extends CustomerDAO {
 
     @Override
-    @SqlUpdate
+    @SqlUpdate("DELETE FROM CUSTOMER")
     public void removeAll();
 
     @Override
@@ -29,20 +29,21 @@ public interface CustomerJdbiDAO extends CustomerDAO {
     public Collection<Customer> getCustomers();
     
     @Override
-    @SqlUpdate("DELETE FROM CUSTOMER WHERE USERNAME = :userName")
+    @SqlUpdate("DELETE FROM CUSTOMER WHERE USERNAME = :username")
     public void removeCustomer(@BindBean Customer customer);
 
     @Override
-    @SqlUpdate("MERGE INTO CUSTOMER(ID, USERNAME, FIRSTNAME, SURNAME, SHIPPING_ADDRESS, EMAIL_ADDRESS) VALUES (:id, :userName, :firstName, :shippingAddress, id:emailAddress)")
+    @SqlUpdate("MERGE INTO CUSTOMER(CUSTOMER_ID, USERNAME, FIRSTNAME, SURNAME, PASSWORD, SHIPPING_ADDRESS, EMAIL_ADDRESS) VALUES (:customerId, :username, :firstName, :surname, :password, :shippingAddress, :emailAddress)")
     public void saveCustomer(@BindBean Customer customer);
 
     @Override
-    @SqlQuery("SELECT FROM CUSTOMER WHERE USERNAME = :userName")
+    @SqlQuery("SELECT * FROM CUSTOMER WHERE USERNAME = :username")
     @RegisterBeanMapper(Customer.class)
-    public Customer searchByUsername(@Bind("userName") String username);
+    public Customer searchByUsername(@Bind("username") String username);
     
     @Override
-    @SqlQuery
-    public boolean matchesCustomer(String username, String password);
+    @SqlQuery("SELECT * FROM CUSTOMER WHERE USERNAME = :username AND PASSWORD = :password")
+    @RegisterBeanMapper(Customer.class)
+    public Customer  matchCustomer(@Bind("username") String username, @Bind("password") String password);
     
 }

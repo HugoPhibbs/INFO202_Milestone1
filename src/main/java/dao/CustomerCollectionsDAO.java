@@ -43,13 +43,13 @@ public class CustomerCollectionsDAO implements CustomerDAO {
     }
 
     @Override
-    public boolean matchesCustomer(String username, String password) {
+    public Customer matchCustomer(String username, String password) {
         for (Customer customer : customers.values()) {
             if (customer.getUsername().equals(username) && customer.getPassword().equals(password)) {
-                return true;
+                return customer;
             }
         }
-        return false;
+        return null;
     }
     
     
