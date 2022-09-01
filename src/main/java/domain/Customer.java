@@ -1,16 +1,26 @@
 package domain;
 
 import java.util.Objects;
+import net.sf.oval.constraint.Length;
+import net.sf.oval.constraint.NotBlank;
+import net.sf.oval.constraint.NotNull;
 
 /**
  * @author Mark George
  */
 public class Customer {
-
 	private Integer customerId;
+        
+        @NotNull(message = "Username cannot be null!")
+        @NotBlank(message = "Password cannot be empty") 
+        @Length(min = 1, message = "Username cannot be empty!")
 	private String username;
 	private String firstName;
 	private String surname;
+        
+        @NotNull(message = "Password cannot be null!")
+        @NotBlank(message = "Password cannot be empty")
+        @Length(min = 1, message = "Password cannot be empty!")
 	private String password;
 	private String emailAddress;
 	private String shippingAddress;
