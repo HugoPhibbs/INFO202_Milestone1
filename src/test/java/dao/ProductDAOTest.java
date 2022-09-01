@@ -33,7 +33,10 @@ public class ProductDAOTest {
     
     @BeforeAll
     public static void initialize() {
-        JdbiDaoFactory.setJdbcUri("jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/schema.sql'");
+        // Tests don't run together, I think it's because of the connection pull being initialized already by other test classes
+        try {
+            JdbiDaoFactory.setJdbcUri("jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/schema.sql'");
+        } catch (IllegalStateException ise){}
     }
     
     @BeforeEach
