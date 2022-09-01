@@ -68,11 +68,11 @@ public class CustomerDAOTest {
     
     @Test
     public void testMatchesCustomer() {
-        assertThat("Matches with contained customer", dao.matchCustomer("username1", "password1"), is(customer1));
-        assertThat("Matches with contained customer, incorrect username", dao.matchCustomer("usernam1", "password1"), is(nullValue()));
-        assertThat("Matches with contained customer, incorrect password", dao.matchCustomer("username1", "passwod1"), is(nullValue()));
+        assertThat("Matches with contained customer", dao.matchCustomer("username1", "password1"), is(true));
+        assertThat("Matches with contained customer, incorrect username", dao.matchCustomer("usernam1", "password1"), is(false));
+        assertThat("Matches with contained customer, incorrect password", dao.matchCustomer("username1", "passwod1"), is(false));
        
-        assertThat("Doesn't match with a non contained customer at all", dao.matchCustomer("username3", "pass"), is(nullValue()));
+        assertThat("Doesn't match with a non contained customer at all", dao.matchCustomer("username3", "pass"), is(false));
     }
     
     @Test

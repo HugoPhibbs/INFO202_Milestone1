@@ -58,5 +58,5 @@ public interface CustomerDAO {
      * @param password String
      * @return Customer found, otherwise null
      */
-    Customer matchCustomer(String username, String password);
+    boolean matchCustomer(String username, String password);
 }

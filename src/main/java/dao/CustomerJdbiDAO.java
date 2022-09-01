@@ -33,7 +33,7 @@ public interface CustomerJdbiDAO extends CustomerDAO {
     public void removeCustomer(@BindBean Customer customer);
 
     @Override
-    @SqlUpdate("MERGE INTO CUSTOMER(CUSTOMER_ID, USERNAME, FIRSTNAME, SURNAME, PASSWORD, SHIPPING_ADDRESS, EMAIL_ADDRESS) VALUES (:customerId, :username, :firstName, :surname, :password, :shippingAddress, :emailAddress)")
+    @SqlUpdate("INSERT INTO CUSTOMER(USERNAME, FIRSTNAME, SURNAME, PASSWORD, SHIPPING_ADDRESS, EMAIL_ADDRESS) VALUES (:username, :firstName, :surname, :password, :shippingAddress, :emailAddress)")
     public void saveCustomer(@BindBean Customer customer);
 
     @Override
@@ -42,8 +42,7 @@ public interface CustomerJdbiDAO extends CustomerDAO {
     public Customer searchByUsername(@Bind("username") String username);
     
     @Override
-    @SqlQuery("SELECT * FROM CUSTOMER WHERE USERNAME = :username AND PASSWORD = :password")
-    @RegisterBeanMapper(Customer.class)
-    public Customer  matchCustomer(@Bind("username") String username, @Bind("password") String password);
+    @SqlQuery("SELECT EXISTS (SELECT * FROM CUSTOMER WHERE USERNAME = :username AND PASSWORD = :password)")
+    public boolean matchCustomer(@Bind("username") String username, @Bind("password") String password);
     
 }
