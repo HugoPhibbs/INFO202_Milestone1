@@ -17,14 +17,23 @@
             <h1>Create an Account</h1>
         </header>
         
-        <a href="index.jsp">Return home</a>
+        <jsp:include page = "nav.jsp"></jsp:include>
 
+        
         <div>
             <h3>Account Details</h3>
+            
+            <%
+                String validation = (String)session.getAttribute("validation");
+                validation = validation != null ? validation : "";
+            %>
+
+            <p><%= validation %></p>
+            
             <form id = "create-account-form" action ="create-account" method = "POST">
                 <div>
                     <label for="username-input">Username:</label>
-                    <input name = "username" id="username-input" type="text">
+                    <input name = "username" id="username-input" type="text" required = "required">
                 </div>
 
                 <div>
@@ -49,7 +58,7 @@
 
                 <div>
                     <label for="password-input">Password:</label>
-                    <input name = "password" id="password-input" type="text">
+                    <input name = "password" id="password-input" type="text" required = "required">
                 </div>
 
                 <button type = "submit" >Create account!</button>

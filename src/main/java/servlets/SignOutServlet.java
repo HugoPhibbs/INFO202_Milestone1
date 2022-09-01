@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 public class SignOutServlet extends HttpServlet {
 
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Handles the HTTP <code>Get</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -28,7 +28,7 @@ public class SignOutServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getSession().invalidate();
         response.sendRedirect("index.jsp");

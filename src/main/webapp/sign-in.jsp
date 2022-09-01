@@ -16,13 +16,13 @@
             <h1>Sign in</h1>
         </header>
         
-        <a href="index.jsp">Return home</a>
+         <jsp:include page = "nav.jsp"></jsp:include>
 
         <div>
             <h3>Account Details</h3>
             <form id="create-account-form" action = "sign-in" method="POST">
-                <label for="username-input">Username:</label><input name = "username-input" id="username-input" type="text">
-                <label for="password-input">Password:</label><input name = "password-input" id="password-input" type="text">
+                <label for="username-input">Username:</label><input name = "username-input" id="username-input" type="text" required>
+                <label for="password-input">Password:</label><input name = "password-input" id="password-input" type="text" required>
                 <button>Sign In!</button>
             </form>
 
