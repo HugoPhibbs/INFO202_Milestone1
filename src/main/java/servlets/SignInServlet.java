@@ -5,10 +5,9 @@
 package servlets;
 
 import dao.CustomerDAO;
-import dao.JdbiDaoFactory;
+import dao.DaoFactory;
 import domain.Customer;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,9 +36,8 @@ public class SignInServlet extends HttpServlet {
         String username = request.getParameter("username-input");
         String password = request.getParameter("password-input");
         
-        // CustomerDAO dao = new CustomerCollectionsDAO();
-        CustomerDAO dao = JdbiDaoFactory.getCustomerDAO();
-        if (dao.matchCustomer(username, password) != null) {
+        CustomerDAO dao = DaoFactory.getCustomerDAO();
+        if (dao.matchCustomer(username, password)) {
             Customer customer = dao.searchByUsername(username);
             HttpSession session = request.getSession();
             session.setAttribute("CURRENT-CUSTOMER", customer);
