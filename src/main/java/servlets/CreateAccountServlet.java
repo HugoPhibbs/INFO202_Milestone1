@@ -56,11 +56,11 @@ public class CreateAccountServlet extends HttpServlet {
             response.sendRedirect("create-account.jsp");
         } else {
             Customer customer = new Customer(username, firstName, lastName, address, email);
-            session.setAttribute("validation", "");
             customer.setPassword(password);
             try {
                 new Validator().assertValid(customer);
                 dao.saveCustomer(customer);
+                session.setAttribute("validation", "");
             } catch (ConstraintsViolatedException cve) {
                 // Server side checking if for some reason html form requirements fail
                 ConstraintViolation[] violations = cve.getConstraintViolations();
