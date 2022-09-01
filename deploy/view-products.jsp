@@ -4,6 +4,7 @@
     Author     : Hugo
 --%>
 
+<%@page import="dao.DaoFactory"%>
 <%@page import="dao.JdbiDaoFactory"%>
 <%@page import="dao.ProductDAO"%>
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
@@ -19,33 +20,34 @@
     </head>
     <body>
         <header><h1>View Products</h1></header>
-        <a href="index.jsp">Return home</a>
+        <jsp:include page = "nav.jsp"></jsp:include>
         <div>
-            <form>
-                <label for ="select-category">Category:</label>
-                <select name ="chosenCategory" id = "select-category">
-                    <option value = "all" class = "select-cat">
-                        All
-                    </option>
-                    <%
-                        // ProductDAO dao = new ProductCollectionsDAO();
-                        ProductDAO dao = JdbiDaoFactory.getProductDAO();
+            <%
+                ProductDAO dao = DaoFactory.getProductDAO();
 
-                        for (String cat : dao.getCategories()) {
-                    %>
+                String category = request.getParameter("cat");
 
+                Collection<Product> products;
 
-                    <option value = "<%=cat%>" class = "select-cat">
-                        <%=cat%>
-                    </option>
+                if (category == null || category.equals("All")) {
+                    products = dao.getProducts();
+                } else {
+                    products = dao.filterByCategory(category);
+                }
 
-                    <%
-                        }
-                    %>
-                </select>
+                System.out.print(dao.getCategories());
+            %>
 
-            </form>
+            <a href = "view-products.jsp?cat=All"><button>All</button></a>
 
+            <%
+                for (String cat : dao.getCategories()) {
+            %>
+
+            <a href = "view-products.jsp?cat=<%=cat%>"><button><%= cat%></button></a>
+            <%
+                }
+            %>
             <table>
                 <thead>
                     <tr>
@@ -65,16 +67,7 @@
                 </thead>
                 <tbody>
                     <%
-                        // TODO handle fitlering!
-                        String chosenCategory = request.getParameter("chosenCategory");
-                        Collection<Product> chosenProducts;
-                        if (chosenCategory == null || chosenCategory.equals("all")) {
-                            chosenProducts = dao.getProducts();
-                        } else {
-                            chosenProducts = dao.filterByCategory(chosenCategory);
-                        }
-
-                        for (Product product : chosenProducts) {
+                        for (Product product : products) {
                     %>
 
                     <tr>
