@@ -1,39 +1,19 @@
-INSERT INTO PRODUCT
-VALUES(1, 'Dalbelo Boots', 'Green boots', 'Boots', 800, 12);
+INSERT INTO PRODUCT VALUES(1, 'Dalbelo Boots', 'Green boots', 'Boots', 800.00, 12.00);
 
-INSERT INTO PRODUCT VALUES(
-    2, 'Solomon Poles', 'Black poles', 'Poles', 300, 9
-);
+INSERT INTO PRODUCT VALUES(2, 'Solomon Poles', 'Black poles', 'Poles', 300.00, 9.00);
 
-INSERT INTO PRODUCT VALUES(
-    3, 'Burton Jacket', 'Orange jacket', 'Outer Wear', 500, 10
-);
+INSERT INTO PRODUCT VALUES(3, 'Burton Jacket', 'Orange jacket', 'Boots', 500.00, 5.00);
 
-INSERT INTO PRODUCT VALUES(
-    4, 'Volcolm Pants', 'Black pants', 'Outer Wear', 450, 15
-);
+INSERT INTO PRODUCT VALUES(4, 'Volcolm Pants', 'Green boots', 'Boots', 450.00, 16.00);
 
-INSERT INTO PRODUCT VALUES(
-    5, 'Smith Goggles', 'Red goggles', 'Goggles', 200, 5
-);
+INSERT INTO PRODUCT VALUES(5, 'Smith Goggles', 'Blue goggles', 'Goggles', 250.00, 10);
 
-INSERT INTO PRODUCT VALUES(
-    6, 'Anon Goggles', 'Black goggles', 'Goggles', 150, 7
-);
+INSERT INTO PRODUCT VALUES(6, 'Anon Goggles', 'Black goggles', 'Goggles', 300.00, 3);
 
-INSERT INTO PRODUCT VALUES(
-    7, 'Spyder Goggles', 'Pink goggles', 'Goggles', 220, 3
-);
+INSERT INTO PRODUCT VALUES(7, 'Volkl ski Boots', 'White boots', 'Boots', 850.00, 1);
 
-INSERT INTO PRODUCT VALUES(
-    8, 'Mons Royale Socks', 'Grey and Blue socks', 'Accessorie', 70, 14
-);
+INSERT INTO PRODUCT VALUES(8, 'Spyder Goggles', 'Pink Goggles', 'Goggles', 200.00, 14);
 
-INSERT INTO PRODUCT VALUES(
-    9, 'IceBreaker Beanie', 'White Striped beanie', 'Accessories', 50, 20
-);
+INSERT INTO PRODUCT VALUES(9, 'Mons Royale Socks', 'Green socks', 'Accessories', 30.00, 20);
 
-INSERT INTO PRODUCT VALUES(
-    10, 'Volkl ski Boots', 'Purple ski boots', 'BOOTS', 90, 8
-);
-
+INSERT INTO PRODUCT VALUES(10, 'IceBreaker Beanie', 'White Striped beanie', 'Accessories', 50.00, 10);
