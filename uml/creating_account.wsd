@@ -1,0 +1,36 @@
+@startuml creating_account
+
+skinparam style strictuml
+
+title Customer Creating an Account
+
+actor User
+participant "create-account" as create_account <<JSP Page>>
+participant index as index <<JSP Page>>
+participant CreateAccountServlet as createAccountServlet <<Servlet>>
+participant CustomerJdbiDAO as DAO <<DAO>>
+database Database
+
+
+User -> create_account: Enter and submit new\naccount (customer) details
+activate create_account
+
+create_account -> createAccountServlet: POST details
+deactivate create_account
+activate createAccountServlet
+
+createAccountServlet -> createAccountServlet: customer = Customer(details)
+
+createAccountServlet -> DAO: saveCustomer(customer)
+activate DAO
+    
+DAO -> Database:  MERGE customer INTO CUSTOMER
+activate Database
+deactivate DAO
+
+createAccountServlet -> index: Redirect
+deactivate Database
+activate index
+deactivate createAccountServlet
+
+@enduml

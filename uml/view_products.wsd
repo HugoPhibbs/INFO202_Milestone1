@@ -1,0 +1,43 @@
+@startuml view_products
+
+skinparam style strictuml
+skinparam maxMessageSize 300
+
+title Customer Viewing Product Catalogue
+
+actor User
+participant index <<JSP Page>>
+participant "view-products" as view_products <<JSP Page>>
+participant ProductJdbiDAO as DAO <<DAO>>
+database Database
+
+User -> index: Click "View Products"
+activate index
+
+index-> view_products: Redirect
+deactivate index
+activate view_products
+
+view_products -> DAO: getProducts() : products
+
+view_products -> DAO: getCategories() : categories
+
+view_products -> view_products: Display categories and products
+
+User -> view_products: Select and submit category
+
+view_products-> DAO: filterByCategory(category)
+activate DAO
+
+DAO -> Database: SELECT * FROM PRODUCT WHERE CATEGORY = :category
+activate Database
+
+Database --> DAO: Result
+deactivate Database
+
+DAO --> view_products: Products
+deactivate DAO
+
+view_products-> view_products: Display products
+
+@enduml

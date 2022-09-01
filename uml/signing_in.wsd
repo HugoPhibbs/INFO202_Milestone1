@@ -1,0 +1,53 @@
+@startuml signing_in
+
+skinparam style strictuml
+skinparam maxMessageSize 300
+
+title Customer Successfully Signing In
+
+actor User
+participant "sign-in" as sign_in<<JSP Page>>
+participant index <<JSP Page>>
+participant Session <<HttpSession>>
+participant SignInServlet <<Servlet>>
+participant CustomerJdbiDAO as DAO <<DAO>>
+database Database
+
+User -> sign_in: Enter and Submit details
+activate sign_in
+
+sign_in -> SignInServlet: POST sign-in
+deactivate sign_in
+activate SignInServlet
+
+SignInServlet -> SignInServlet: Get entered username and password
+
+SignInServlet -> DAO: matchesCustomer(username, password)
+activate DAO
+
+DAO -> Database: SELECT EXISTS (SELECT * FROM CUSTOMER WHERE USERNAME = :username AND PASSWORD = :password)
+activate Database
+
+Database --> DAO: Exists
+deactivate Database
+
+DAO --> SignInServlet: Matches customer
+
+SignInServlet -> SignInServlet: searchByUserName(username) : customer
+deactivate DAO
+
+SignInServlet -> Session: setAttribute("customer", customer)
+
+SignInServlet -> index: Redirect
+activate index
+deactivate SignInServlet
+
+index -> Session: Check has customer attribute
+activate Session
+
+Session --> index: Has saved customer
+deactivate Session
+
+index -> index: Display "sign out"\nand "view products" buttons
+
+@enduml
