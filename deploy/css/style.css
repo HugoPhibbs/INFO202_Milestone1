@@ -1,8 +1,49 @@
+* {
+    font-family: Calibri;
+}
+
 #create-account-form {
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
     gap: 1em;
+}
+
+.nav-links-div {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 1em;
+    justify-content: center;
+}
+
+.nav-div {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 0.5em;
+}
+
+body {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: start;
+    gap: 1em;
+    background-image: url("https://pixnio.com/free-images/2017/10/24/2017-10-24-07-28-16.jpg");
+}
+
+
+header {
+    background-color: lightgray;
+    text-align: center;
+    width: 100%;
+}
+
+h3 {
+    text-align: center;
+}
+
+h1 { 
+    color: white
 }
 
 #address-input {
@@ -11,4 +52,8 @@
 
 .select-cat {
     width: 5em;
+}
+
+.validation {
+    color: red;
 }

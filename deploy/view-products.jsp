@@ -16,10 +16,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <link rel= "stylesheet" href = "./css/style.css" >  
         <title>View Products</title>
     </head>
     <body>
-        <header><h1>View Products</h1></header>
+        <header><h1>Products</h1></header>
         <jsp:include page = "nav.jsp"></jsp:include>
         <div>
             <%
@@ -48,6 +49,8 @@
             <%
                 }
             %>
+            
+            <h3>Products</h3>
             <table>
                 <thead>
                     <tr>
